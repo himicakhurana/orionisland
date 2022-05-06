@@ -5,8 +5,7 @@ using UnityEngine;
 public class squirrel : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float jumpforce = 10f;
-    Rigidbody2D rb;
+    /*Rigidbody2D rb;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,11 +22,54 @@ public class squirrel : MonoBehaviour
         {
              this.transform.Translate(Vector3.right * Time.deltaTime);
         } 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            rb.AddForce(Vector3.up * jumpforce);
-            Debug.Log("jump");
-        }
+
         
+    }*/
+    public float moveSpeed = 30f;
+    private float xMin, xMax;
+    private float yMin, yMax;
+
+    private void Start()
+    {
+        var spriteSize = GetComponent<SpriteRenderer>().bounds.size.x * .5f; 
+
+        var cam = Camera.main;
+        var camHeight = cam.orthographicSize;
+        var camWidth = cam.orthographicSize * cam.aspect;
+
+        yMin = -camHeight + spriteSize;
+        yMax = camHeight - spriteSize; 
+
+        xMin = -camWidth + spriteSize; 
+        xMax = camWidth - spriteSize;  
     }
+
+    private void Update()
+    {
+        // Get buttons
+        var ver = Input.GetAxis("Vertical");
+        var hor = Input.GetAxis("Horizontal");
+
+        // Calculate movement direction
+        var direction = new Vector2(hor, ver).normalized;
+        direction *= moveSpeed * Time.deltaTime;
+
+        var xValidPosition = Mathf.Clamp(transform.position.x + direction.x, xMin, xMax);
+        var yValidPosition = Mathf.Clamp(transform.position.y + direction.y, yMin, yMax);
+
+        transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
+    }
+ 
+
+        
+
+
+  void OnTriggerEnter2D(Collider2D frog)
+    {
+
+
+
 }
+}
+    
+
