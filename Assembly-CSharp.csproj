@@ -43,6 +43,7 @@
      <Compile Include="Assets/eagle.cs" />
      <Compile Include="Assets/scrolll.cs" />
      <Compile Include="Assets/squirrel.cs" />
+     <Compile Include="Assets/shrooms.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Users/nehar22/Documents/MAGIC/2020.3.26f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

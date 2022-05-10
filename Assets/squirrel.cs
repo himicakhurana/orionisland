@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class squirrel : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class squirrel : MonoBehaviour
     public float moveSpeed = 30f;
     private float xMin, xMax;
     private float yMin, yMax;
+    public int shrooms=0;
+    public Text textBox;
 
     private void Start()
     {
@@ -65,8 +68,15 @@ public class squirrel : MonoBehaviour
 
 
   void OnTriggerEnter2D(Collider2D frog)
-    {
+    
+{
+if (frog.name.Contains("shrooms"))
+        { 
+shrooms++;
+        textBox.text = "Shrooms Collected: "+shrooms.ToString();
 
+
+}
 
 
 }
