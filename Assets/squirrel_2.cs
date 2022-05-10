@@ -31,7 +31,10 @@ public class squirrel_2 : MonoBehaviour
     private float xMin, xMax;
     private float yMin, yMax;
     public Text textBox;
-
+    public Sprite[] spriteArray;
+    private int sp_index=0;
+        public SpriteRenderer spriteRenderer;
+    private int vaal = 0;
     private void Start()
     {
         var spriteSize = GetComponent<SpriteRenderer>().bounds.size.x * .5f; 
@@ -49,6 +52,7 @@ public class squirrel_2 : MonoBehaviour
 
     private void Update()
     {
+        vaal++;
         // Get buttons
         var ver = Input.GetAxis("Vertical");
         var hor = Input.GetAxis("Horizontal");
@@ -61,13 +65,27 @@ public class squirrel_2 : MonoBehaviour
         var yValidPosition = Mathf.Clamp(transform.position.y + direction.y, yMin, yMax);
 
         transform.position = new Vector3(xValidPosition, yValidPosition, 0f);
+        if ((ver != 0 || hor != 0) && vaal % 100 == 0)
+        {
+            spriteRenderer.sprite = spriteArray[sp_index];
+            if (sp_index == spriteArray.Length - 1)
+            {
+                sp_index = 0;
+            }
+            else
+            {
+                sp_index++;
+            }
+
+        }
+
     }
- 
-
-        
 
 
-  void OnTriggerEnter2D(Collider2D frog)
+
+
+
+    void OnTriggerEnter2D(Collider2D frog)
     {
 if (frog.name.Contains("eagle"))
         { 
@@ -76,7 +94,8 @@ eagle++;
 
 
 }
-}
+
+    }
 
 
 }
